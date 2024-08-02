@@ -1,38 +1,32 @@
-//module.exports = function toReadable() {
+module.exports = function toReadable(number) {
 
-let number = 310
-let prepStr = `${number}`
-let prepAr = prepStr.split('').reverse()
-let newAr = []
+    let prepStr = `${number}`
+    let prepAr = prepStr.split('').reverse()
+    let newAr = []
 
-let simple = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
-let teen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
-let tens = ['empty', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
-let big = ['hundred']
+    let simple = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    let teen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
+    let tens = ['empty', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
-console.log(newAr)
+    console.log(newAr)
 
-for (let i = 0; i < prepAr.length; ++i) {
-    if (prepAr[i] === '0') true
-    else if (i % 2 === 0) {
-        newAr.push(simple[+prepAr[i] - 1])
-        console.log(newAr)
+    for (let i = 0; i < prepAr.length; ++i) {
+        if (number === 0) newAr.push('zero')
+        else if (prepAr[i] === '0') newAr.push('')
+        else if (i % 2 === 0) {
+            newAr.push(simple[+prepAr[i] - 1])
+            if (i !== 0) newAr[i] = `${newAr[i]} hundred`
+        }
+        else if (prepAr[i] === '1') {
+            newAr[i - 1] = ''
+            newAr.push(teen[+prepAr[i - 1]])
+        }
+        else {
+            newAr.push(tens[+prepAr[i] - 1])
+        }
     }
-    else if (prepAr[i] === '1') {
-        newAr[i - 1] = ''
-        newAr.push(teen[+prepAr[i - 1]])
-        console.log(newAr)
-    }
-    else {
-        newAr.push(tens[+prepAr[i] - 1])
-        console.log(newAr)
-    }
+
+    return newAr.reverse().join(' ').trim().replaceAll('  ', ' ')
+
+
 }
-
-newAr[2] = `${newAr[2]} hundred`
-
-console.log(newAr.reverse().join(' '))
-return newAr.reverse().join(' ')
-
-
-//}
